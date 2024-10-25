@@ -1,20 +1,44 @@
+let data = {"a": [
+    {
+      "word": "a"
+    },
+    {
+      "word": "b"
+    },
+    {
+      "word": "c"
+    },
+    {
+      "word": "d"
+    },
+    {
+      "word": "e"
+    },
+    {
+      "word": "f"
+    }
+], "b" : [
+    {
+      "word": "q"
+    },
+    {
+      "word": "w"
+    },
+    {
+      "word": "r"
+    },
+    {
+      "word": "t"
+    },
+    {
+      "word": "y"
+    }
+]}
+
 let set = null;
-let data = [];
 
 function choose_set() {
     set = event.target.id
-
-    let reader = new FileReader();
-    reader.readAsText(set + ".csv")
-
-    reader.onload = function() {
-        data = reader.result.split("/\r\n|\n/");
-    }
-
-    reader.onerror = function() {
-        alert("Error loading file")
-    }
-
     run_game()
 }
 
@@ -59,10 +83,10 @@ function orientation_check(e) {
 }
 
 function run_game() {
-    if (data.length == 0) {
-        alert("No words in file")
+    if (set == null) {
+        alert("No set chosen")
         return
     }
-    let game_word = data[Math.floor(Math.random() * data.length)];
+    let game_word = data[set][Math.floor(Math.random() * data[set].length)];
     document.querySelector("#game-word").innerHTML = game_word;
 }
