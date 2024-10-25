@@ -62,7 +62,13 @@ function motion_check(motion) {
 
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
-    window.addEventListener("deviceorientation", orientation_check)
+    if (beta > 30) {
+        wrong()
+    } else if (beta < -30){
+        correct()
+    } else {
+        window.addEventListener("deviceorientation", orientation_check)
+    }
 }
 
 function orientation_check(orientation) {
@@ -102,15 +108,20 @@ function correct() {
     display_screen("correct")
 
     game_score += 1;
-    setTimeout(display_screen("game"), 1000)
+    document.querySelector("#score").innerHTML = "Score: " + game_score;
+    setTimeout(function () {
+        display_screen("game")
+    }, 1000)
 
     run_game()
 }
 
-function incorrect() {
-    display_screen("incorrect")
+function wrong() {
+    display_screen("wrong")
 
-    setTimeout(display_screen("game"), 1000)
+    setTimeout(function () {
+        display_screen("game")
+    }, 1000)
 
     run_game()
 }
