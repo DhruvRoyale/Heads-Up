@@ -14,5 +14,13 @@ screen.orientation.addEventListener("change", (e) => {
     let type = e.target.type;
     let angle = e.target.angle;
 
-    document.querySelector('#test-2').innerHTML = "Type: " + type + "\n Angle: " + angle;
+    if (type.includes("landscape")) {
+        document.querySelector(".start-screen").hidden = true;
+        document.querySelector(".landscape-request").hidden = true;
+        document.querySelector(".game").hidden = false;
+    } else {
+        document.querySelector(".start-screen").hidden = true;
+        document.querySelector(".landscape-request").hidden = false;
+        document.querySelector(".game").hidden = true;
+    }
 })
