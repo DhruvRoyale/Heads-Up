@@ -90,3 +90,8 @@ function run_game() {
     let game_word = data[set][Math.floor(Math.random() * data[set].length)]["word"];
     document.querySelector("#game-word").innerHTML = game_word;
 }
+
+function reset() {
+    set = null;
+    orientation_check();
+}
