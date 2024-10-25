@@ -55,7 +55,7 @@ function requestOrientationPermission(){
 window.addEventListener("deviceorientation", orientation_check)
 
 function orientation_check(e) {
-    if (data.length == 0) {
+    if (set == null) {
         document.querySelector(".start-screen").hidden = true;
         document.querySelector(".game-select").hidden = false;
         document.querySelector(".landscape-request").hidden = true;
