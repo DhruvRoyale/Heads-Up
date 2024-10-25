@@ -38,6 +38,7 @@ let data = {"a": [
 let set = null;
 let game_score = 0;
 let pause = false;
+let game_started = false;
 
 function choose_set() {
     set = event.target.id
@@ -60,6 +61,13 @@ async function motion_check(motion) {
     if (pause == true) {
         return
     }
+    if (set == null) {
+        display_screen("game-select")
+        return
+    }
+    if (game_started == false) {
+        return
+    }
 
     let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
@@ -67,7 +75,7 @@ async function motion_check(motion) {
 
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
-    if (beta > 30) {
+    if (beta > 90) {
         pause = true
         display_screen("wrong")
 
@@ -77,7 +85,7 @@ async function motion_check(motion) {
         pause = false
 
         run_game()
-    } else if (beta < -30){
+    } else if (beta < -90){
         pause = true
         display_screen("correct")
 
@@ -95,7 +103,7 @@ async function motion_check(motion) {
     }
 }
 
-function orientation_check(orientation) {
+async function orientation_check(orientation) {
     if (pause == true) {
         return
     }
@@ -112,6 +120,8 @@ function orientation_check(orientation) {
 
     if (Math.abs(gamma) >= 40 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
         display_screen("game")
+        await delay(1000)
+        game_started = true
     } else {
         display_screen("landscape-request")
     }
@@ -128,6 +138,7 @@ function run_game() {
 
 function reset() {
     set = null;
+    game_started = false;
     orientation_check();
 }
 
