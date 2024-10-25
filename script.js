@@ -55,7 +55,7 @@ function requestOrientationPermission(){
 
 window.addEventListener("devicemotion", motion_check)
 
-function motion_check(motion) {
+async function motion_check(motion) {
     let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
@@ -63,9 +63,22 @@ function motion_check(motion) {
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
     if (beta > 30) {
-        wrong()
+        display_screen("wrong")
+
+        await delay(1500)
+        display_screen("game")
+
+        run_game()
     } else if (beta < -30){
-        correct()
+        display_screen("correct")
+
+        game_score += 1;
+        document.querySelector("#score").innerHTML = "Score: " + game_score;
+        
+        await delay(1500)
+        display_screen("game")
+
+        run_game()
     } else {
         window.addEventListener("deviceorientation", orientation_check)
     }
@@ -102,27 +115,6 @@ function run_game() {
 function reset() {
     set = null;
     orientation_check();
-}
-
-async function correct() {
-    display_screen("correct")
-
-    game_score += 1;
-    document.querySelector("#score").innerHTML = "Score: " + game_score;
-    
-    await delay(1500)
-    display_screen("game")
-
-    run_game()
-}
-
-async function wrong() {
-    display_screen("wrong")
-
-    await delay(1500)
-    display_screen("game")
-
-    run_game()
 }
 
 function display_screen(screen) {
