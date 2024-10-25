@@ -1,7 +1,13 @@
 let set = null;
+let data = [];
 
 function choose_set() {
     set = event.target.id
+    let csv_file = File(set + ".csv");
+    csv_file.open('r');
+    csv_file.encoding = 'utf-8';
+    let data = csv_file.read().split('/\r\n|\n/');
+    csv_file.close();
     run_game()
 }
 
@@ -46,5 +52,6 @@ function orientation_check(e) {
 }
 
 function run_game() {
-    return
+    let game_word = data[Math.floor(Math.random() * data.length)];
+    document.querySelector("#game-word").innerHTML = game_word;
 }
