@@ -37,6 +37,7 @@ let data = {"a": [
 
 let set = null;
 let game_score = 0;
+let pause = false;
 
 function choose_set() {
     set = event.target.id
@@ -56,6 +57,10 @@ function requestOrientationPermission(){
 window.addEventListener("devicemotion", motion_check)
 
 async function motion_check(motion) {
+    if (pause == true) {
+        return
+    }
+    
     let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
@@ -64,19 +69,23 @@ async function motion_check(motion) {
 
     if (beta > 30) {
         display_screen("wrong")
+        pause = true
 
         await delay(1500)
         display_screen("game")
+        pause = false
 
         run_game()
     } else if (beta < -30){
         display_screen("correct")
+        pause = true
 
         game_score += 1;
         document.querySelector("#score").innerHTML = "Score: " + game_score;
         
         await delay(1500)
         display_screen("game")
+        pause = false
 
         run_game()
     } else {
