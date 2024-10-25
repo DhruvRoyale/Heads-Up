@@ -19010,11 +19010,11 @@ async function motion_check(motion) {
         display_screen("wrong")
 
         await delay(1500)
+        run_game()
+        
         display_screen("game")
         await delay(1500)
         pause = false
-
-        run_game()
     } else if (beta < -90){
         pause = true
         display_screen("correct")
@@ -19023,11 +19023,11 @@ async function motion_check(motion) {
         document.querySelector("#score").innerHTML = "Score: " + game_score;
         
         await delay(1500)
+        run_game()
+
         display_screen("game")
         await delay(1500)
         pause = false
-
-        run_game()
     } else {
         window.addEventListener("deviceorientation", orientation_check)
     }
