@@ -34,21 +34,36 @@
 
         <div class="main-container">
             <h1>Heads Up</h1>
-            <p id="game"></p>
+            <p id="orientation"></p>
+            <p id="motion"></p>
+
             <div class="start-screen">
                 <button onclick='requestOrientationPermission();' class="btn btn-primary mb-2">Start game</button>
             </div>
+
             <div class="game-select" hidden>
                 <p>Please select a game: </p>
                 <button id="a" onclick="choose_set()">A</button>
                 <button id="b" onclick="choose_set()">B</button>
             </div>
+
             <div class="landscape-request" hidden>
                 <p>Hold the device near your forehead</p>
             </div>
+
             <div class="game" hidden>
+                <p>Score: 0</p>
                 <p id="game-word"></p>
+                <button onclick="correct()" class="btn btn-primary mb-2">Correct</button>
+                <button onclick="wrong()" class="btn btn-primary mb-2">Wrong</button>
                 <button onclick="reset()" class="btn btn-primary mb-2">Reset</button>
+            </div>
+
+            <div class="correct">
+                <p id="correct-text">Correct</p>
+            </div>
+            <div class="wrong">
+                <p id="wrong-text">Wrong</p>
             </div>
         </div>
         <script src="script.js"></script>

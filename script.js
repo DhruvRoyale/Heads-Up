@@ -36,6 +36,7 @@ let data = {"a": [
 ]}
 
 let set = null;
+let game_score = 0;
 
 function choose_set() {
     set = event.target.id
@@ -52,33 +53,32 @@ function requestOrientationPermission(){
     .catch(console.error)
 }
 
-window.addEventListener("deviceorientation", orientation_check)
+window.addEventListener("devicemotion", motion_check)
 
-function orientation_check(e) {
+function motion_check(motion) {
+    let alpha = motion.rotationRate.aplha;
+    let beta = motion.rotationRate.beta;
+    let gamma = motion.rotationRate.gamma;
+
+    document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
+}
+
+function orientation_check(orientation) {
     if (set == null) {
-        document.querySelector(".start-screen").hidden = true;
-        document.querySelector(".game-select").hidden = false;
-        document.querySelector(".landscape-request").hidden = true;
-        document.querySelector(".game").hidden = true;
+        display_screen("game_select")
         return
     }
 
-    let alpha = e.alpha;
-    let beta = e.beta;
-    let gamma = e.gamma;
+    let alpha = orientation.alpha;
+    let beta = orientation.beta;
+    let gamma = orientation.gamma;
 
-    document.querySelector("#game").innerHTML = "Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
+    document.querySelector("#orientation").innerHTML = "Orientation = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
     if (Math.abs(gamma) >= 50 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
-        document.querySelector(".start-screen").hidden = true;
-        document.querySelector(".game-select").hidden = true;
-        document.querySelector(".landscape-request").hidden = true;
-        document.querySelector(".game").hidden = false;
+        display_screen("game")
     } else {
-        document.querySelector(".start-screen").hidden = true;
-        document.querySelector(".game-select").hidden = true;
-        document.querySelector(".landscape-request").hidden = false;
-        document.querySelector(".game").hidden = true;
+        display_screen("landscape-request")
     }
 }
 
@@ -94,4 +94,33 @@ function run_game() {
 function reset() {
     set = null;
     orientation_check();
+}
+
+function correct() {
+    display_screen("correct")
+
+    game_score += 1;
+    setTimeout(display_screen("game"), 1000)
+
+    run_game()
+}
+
+function incorrect() {
+    display_screen("incorrect")
+
+    setTimeout(display_screen("game"), 1000)
+
+    run_game()
+}
+
+function display_screen(screen) {
+    let screens = ["start-screen", "game-select", "landscape-request", "game", "correct", "wrong"]
+    
+    for (let i = 0; i < screens.length; i++) {
+        if (screens[i] == screen) {
+            document.querySelector("." + screens[i]).hidden = false;
+        } else {
+            document.querySelector("." + screens[i]).hidden = true;
+        }
+    }
 }
