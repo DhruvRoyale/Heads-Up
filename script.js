@@ -104,24 +104,23 @@ function reset() {
     orientation_check();
 }
 
-function correct() {
+async function correct() {
     display_screen("correct")
 
     game_score += 1;
     document.querySelector("#score").innerHTML = "Score: " + game_score;
-    setTimeout(function () {
-        display_screen("game")
-    }, 1000)
+    
+    await delay(1500)
+    display_screen("game")
 
     run_game()
 }
 
-function wrong() {
+async function wrong() {
     display_screen("wrong")
 
-    setTimeout(function () {
-        display_screen("game")
-    }, 1000)
+    await delay(1500)
+    display_screen("game")
 
     run_game()
 }
@@ -136,4 +135,8 @@ function display_screen(screen) {
             document.querySelector("." + screens[i]).hidden = true;
         }
     }
+}
+
+function delay(n) {
+    return new Promise(done => setTimeout(() => done(), n));
 }
