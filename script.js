@@ -73,6 +73,7 @@ async function motion_check(motion) {
 
         await delay(1500)
         display_screen("game")
+        await delay(1500)
         pause = false
 
         run_game()
@@ -85,6 +86,7 @@ async function motion_check(motion) {
         
         await delay(1500)
         display_screen("game")
+        await delay(1500)
         pause = false
 
         run_game()
@@ -94,6 +96,9 @@ async function motion_check(motion) {
 }
 
 function orientation_check(orientation) {
+    if (pause == true) {
+        return
+    }
     if (set == null) {
         display_screen("game-select")
         return
@@ -105,7 +110,7 @@ function orientation_check(orientation) {
 
     document.querySelector("#orientation").innerHTML = "Orientation = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
-    if (Math.abs(gamma) >= 50 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
+    if (Math.abs(gamma) >= 40 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
         display_screen("game")
     } else {
         display_screen("landscape-request")
