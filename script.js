@@ -61,6 +61,8 @@ function motion_check(motion) {
     let gamma = motion.rotationRate.gamma;
 
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
+
+    window.addEventListener("deviceorientation", orientation_check)
 }
 
 function orientation_check(orientation) {
