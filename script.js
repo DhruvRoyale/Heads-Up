@@ -3,10 +3,10 @@ let data = [];
 
 function choose_set() {
     set = event.target.id
-    let csv_file = File(set + ".csv");
+    let csv_file = new File(set + ".csv");
     csv_file.open('r');
     csv_file.encoding = 'utf-8';
-    let data = csv_file.read().split('/\r\n|\n/');
+    data = csv_file.read().split('/\r\n|\n/');
     csv_file.close();
     run_game()
 }
