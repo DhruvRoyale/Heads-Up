@@ -3,11 +3,18 @@ let data = [];
 
 function choose_set() {
     set = event.target.id
-    let csv_file = new File(set + ".csv");
-    csv_file.open('r');
-    csv_file.encoding = 'utf-8';
-    data = csv_file.read().split('/\r\n|\n/');
-    csv_file.close();
+
+    let reader = new FileReader();
+    reader.readAsText(set + ".csv")
+
+    reader.onload = function() {
+        data = reader.result.split("/\r\n|\n/");
+    }
+
+    reader.onerror = function() {
+        alert("Error loading file")
+    }
+
     run_game()
 }
 
@@ -24,7 +31,7 @@ function requestOrientationPermission(){
 window.addEventListener("deviceorientation", orientation_check)
 
 function orientation_check(e) {
-    if (set == null) {
+    if (data.length == 0) {
         document.querySelector(".start-screen").hidden = true;
         document.querySelector(".game-select").hidden = false;
         document.querySelector(".landscape-request").hidden = true;
@@ -52,6 +59,10 @@ function orientation_check(e) {
 }
 
 function run_game() {
+    if (data.length == 0) {
+        alert("No words in file")
+        return
+    }
     let game_word = data[Math.floor(Math.random() * data.length)];
     document.querySelector("#game-word").innerHTML = game_word;
 }
