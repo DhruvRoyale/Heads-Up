@@ -87,6 +87,6 @@ function run_game() {
         alert("No set chosen")
         return
     }
-    let game_word = data[set][Math.floor(Math.random() * data[set].length)];
+    let game_word = data[set][Math.floor(Math.random() * data[set].length)]["word"];
     document.querySelector("#game-word").innerHTML = game_word;
 }
