@@ -34,30 +34,28 @@
 
         <div class="main-container">
             <h1>Heads Up</h1>
-            <p id="orientation"></p>
-            <p id="motion"></p>
 
             <div class="start-screen">
-                <button onclick='requestOrientationPermission();' class="btn btn-primary mb-2">Start game</button>
+                <button onclick='requestOrientationPermission();' class="btn btn-primary mb-2" id="start-button">Start game</button>
             </div>
 
             <div class="game-select" hidden>
-                <p>Please select a game: </p>
+                <p id="game-select-request">Please select a game: </p>
                 <button id="hollywood" onclick="choose_set()">Hollywood Movies</button>
                 <button id="games" onclick="choose_set()">Video Games</button>
             </div>
 
             <div class="landscape-request" hidden>
-                <p>Hold the device near your forehead</p>
-                <button onclick="reset()" class="btn btn-primary mb-2">Reset</button>
+                <p id="landscape-request-text">Hold the device near your forehead</p>
+                <button onclick="reset()" class="btn btn-primary mb-2" id="landscape-reset">Reset</button>
             </div>
 
             <div class="game" hidden>
                 <p id="score">Score: 0</p>
-                <p id="game-word"></p>
-                <button onclick="correct()" class="btn btn-primary mb-2">Correct</button>
-                <button onclick="wrong()" class="btn btn-primary mb-2">Wrong</button>
-                <button onclick="reset()" class="btn btn-primary mb-2">Reset</button>
+                <div class="sub-game">
+                    <p id="game-word">Word</p>
+                    <button onclick="reset()" class="btn btn-primary mb-2" id="game-reset">Reset</button>
+                </div>
             </div>
 
             <div class="correct" hidden>

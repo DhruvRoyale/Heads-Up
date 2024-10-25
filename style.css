@@ -2,6 +2,8 @@ body {
     background-color: #1c1c1c;
     color: #f2f2f2;
     font-family: Arial, sans-serif;
+    font-size: 16px;
+    height: 100%;
 }
 
 .navbar-custom {
@@ -17,12 +19,80 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 8px;
     margin: 0px;
     border: 0px;
     padding: 0px;
 }
 
 .title {
-    margin-top: 0.5%;
+    margin-top: 1%;
+}
+
+.start-screen {
+    margin-top: 20vh;
+}
+
+#start-button {
+    width: 25vw;
+    height: 16vh;
+    font-size: 1.5em;
+}
+
+#game-select-request {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+#landscape-request-text {
+    font-size: 2em;
+    margin-top: 10vh;
+}
+
+.landscape-request {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60vh;
+    align-items: center;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 3%;
+}
+
+.sub-game {
+    width: 100%;
+    justify-content: space-between;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#game-reset {
+    width: 20%;
+}
+
+#game-word {
+    font-size: 3em;
+}
+
+.correct, .wrong {
+    margin-top: 10%;
+}
+
+#correct-text, #wrong-text {
+    font-size: 3em;
+}
+
+#correct-text {
+    color: #00FF00;
+}
+
+#wrong-text {
+    color: #FF0000;
 }
