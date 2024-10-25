@@ -17,7 +17,7 @@ function orientation_check(e) {
 
     document.querySelector("#game").innerHTML = "Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
-    if (Math.abs(gamma) >= 70 && Math.abs(beta) <= 20) {
+    if (Math.abs(gamma) >= 50 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
         document.querySelector(".start-screen").hidden = true;
         document.querySelector(".landscape-request").hidden = true;
         document.querySelector(".game").hidden = false;
