@@ -2,15 +2,15 @@ function requestOrientationPermission(){
     DeviceOrientationEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
-            window.addEventListener('deviceorientation', (e) => {
-                document.querySelector('#test').innerHTML = e;
-            })
+            window.addEventListener('deviceorientation', orientation_check())
         }
     })
     .catch(console.error)
 }
 
-screen.orientation.addEventListener("change", (e) => {
+screen.orientation.addEventListener("change", orientation_check())
+
+function orientation_check() {
     let type = e.target.type;
     let angle = e.target.angle;
 
@@ -23,4 +23,4 @@ screen.orientation.addEventListener("change", (e) => {
         document.querySelector(".landscape-request").hidden = false;
         document.querySelector(".game").hidden = true;
     }
-})
+}
