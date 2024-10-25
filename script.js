@@ -60,7 +60,7 @@ async function motion_check(motion) {
     if (pause == true) {
         return
     }
-    
+
     let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
@@ -68,8 +68,8 @@ async function motion_check(motion) {
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
 
     if (beta > 30) {
-        display_screen("wrong")
         pause = true
+        display_screen("wrong")
 
         await delay(1500)
         display_screen("game")
@@ -77,8 +77,8 @@ async function motion_check(motion) {
 
         run_game()
     } else if (beta < -30){
-        display_screen("correct")
         pause = true
+        display_screen("correct")
 
         game_score += 1;
         document.querySelector("#score").innerHTML = "Score: " + game_score;
