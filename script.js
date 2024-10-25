@@ -2,13 +2,13 @@ function requestOrientationPermission(){
     DeviceOrientationEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
-            window.addEventListener('deviceorientation', orientation_check(e))
+            window.addEventListener('deviceorientation', orientation_check)
         }
     })
     .catch(console.error)
 }
 
-window.addEventListener("deviceorientation", orientation_check(e))
+window.addEventListener("deviceorientation", orientation_check)
 
 function orientation_check(e) {
     let gamma = e.gamma;
