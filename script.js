@@ -54,19 +54,20 @@ function requestOrientationPermission(){
 }
 
 window.addEventListener("devicemotion", motion_check)
-window.addEventListener("deviceorientation", orientation_check)
 
 function motion_check(motion) {
-    let alpha = motion.rotationRate.aplha;
+    let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
 
     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
+
+    window.addEventListener("deviceorientation", orientation_check)
 }
 
 function orientation_check(orientation) {
     if (set == null) {
-        display_screen("game_select")
+        display_screen("game-select")
         return
     }
 
