@@ -2,19 +2,23 @@ function requestOrientationPermission(){
     DeviceOrientationEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
-            window.addEventListener('deviceorientation', orientation_check())
+            window.addEventListener('deviceorientation', orientation_check(e))
         }
     })
     .catch(console.error)
 }
 
-screen.orientation.addEventListener("change", orientation_check())
+window.addEventListener("deviceorientation", orientation_check(e))
 
-function orientation_check() {
-    let type = e.target.type;
-    let angle = e.target.angle;
+function orientation_check(e) {
+    let gamma = e.gamma;
 
-    if (type.includes("landscape")) {
+    document.querySelector(".start-screen").hidden = true
+    document.querySelector(".game").hidden = false
+
+    document.querySelector("#game").innerHTML = gamma
+
+    /* if (type.includes("landscape")) {
         document.querySelector(".start-screen").hidden = true;
         document.querySelector(".landscape-request").hidden = true;
         document.querySelector(".game").hidden = false;
@@ -22,5 +26,5 @@ function orientation_check() {
         document.querySelector(".start-screen").hidden = true;
         document.querySelector(".landscape-request").hidden = false;
         document.querySelector(".game").hidden = true;
-    }
+    } */
 }
