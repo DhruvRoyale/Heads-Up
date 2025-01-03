@@ -43,6 +43,93 @@ body {
     font-size: 1.2em;
 }
 
+.game-option-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.game-option {
+    width: 80vw;
+    aspect-ratio: 4/3;
+    margin-bottom: 4%;
+    margin-right: 3%;
+    margin-left: 3%;
+    background-repeat: round;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.9);
+    transition-duration: 0.5s;
+}
+
+.game-option:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+#bollywood, #hollywood {
+    background-image: url(movie.jpg);
+}
+
+#songs {
+    background-image: url(songs.jpg);
+}
+
+#games {
+    background-image: url(games.jpg);
+}
+
+#sports {
+    background-image: url(sports.png);
+}
+
+#characters {
+    background-image: url(characters.jpg);
+}
+
+#disney {
+    background-image: url(disney.jpg);
+}
+
+#marvel {
+    background-image: url(marvel.png);
+}
+
+#harrypotter {
+    background-image: url(harrypotter.jpg);
+}
+
+#pokemon {
+    background-image: url(pokemon.jpg);
+}
+
+#starwars {
+    background-image: url(starwars.jpg);
+}
+
+#food {
+    background-image: url(food.jpg);
+}
+
+#countries {
+    background-image: url(country.jpg);
+}
+
+#modernfamily {
+    background-image: url(modernfamily.jpg);
+}
+
+.game-option span {
+    width: 100%;
+    height: 16%;
+    background-color: rgba(12, 12, 12, 0.5);
+    text-align: center;
+    font-size: 1.4em;
+}
+
 #landscape-request-text {
     font-size: 2em;
     margin-top: 10vh;
@@ -98,4 +185,44 @@ body {
 
 #wrong-text {
     color: #FF0000;
+}
+
+@media (min-width: 400px) {
+    .game-option {
+        width: 40vw;
+        margin-bottom: 2%;
+    }
+
+    .game-option span {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 600px) {
+    .game-option span {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 750px) {
+    .game-option {
+        width: 20vw;
+        margin-bottom: 3%;
+    }
+
+    .game-option span {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1100px) {
+    .game-option span {
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width: 1350px) {
+    .game-option span {
+        font-size: 1.6em;
+    }
 }
