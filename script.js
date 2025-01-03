@@ -22926,6 +22926,7 @@ async function motion_check(motion) {
         return
     }
     if (game_started == false) {
+        window.addEventListener("deviceorientation", orientation_check)
         return
     }
 
