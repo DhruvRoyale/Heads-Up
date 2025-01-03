@@ -22971,6 +22971,8 @@ async function orientation_check(orientation) {
         return
     }
 
+    game_started = true
+
     let alpha = orientation.alpha;
     let beta = orientation.beta;
     let gamma = orientation.gamma;
