@@ -22934,8 +22934,6 @@ async function motion_check(motion) {
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
 
-/*     document.querySelector("#motion").innerHTML = "Motion = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
- */
     if (beta > 90) {
         pause = true
         display_screen("wrong")
@@ -22977,8 +22975,6 @@ async function orientation_check(orientation) {
     let beta = orientation.beta;
     let gamma = orientation.gamma;
 
-/*     document.querySelector("#orientation").innerHTML = "Orientation = Alpha: " + alpha + "\n Beta: " + beta + "\n Gamma: " + gamma;
- */
     if (Math.abs(gamma) >= 40 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
         display_screen("game")
         await delay(1000)
