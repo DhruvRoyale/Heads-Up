@@ -30540,10 +30540,8 @@ for (let option in data) {
 }
 
 function choose_set() {
-    set = event.target.id
-	pause = true;
 	delay(1500)
-	pause = false;
+    set = event.target.id
     run_game()
 }
 
