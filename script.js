@@ -30541,6 +30541,7 @@ for (let option in data) {
 
 function choose_set() {
     set = event.target.id
+	delay(1500)
     run_game()
 }
 
