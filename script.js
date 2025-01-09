@@ -30584,8 +30584,6 @@ async function motion_check(motion) {
     mot_beta = motion.rotationRate.beta;
     mot_gamma = motion.rotationRate.gamma;
 
-	// landscape-left = primary, landscape-right = secondary
-
     if (((mot_beta > 90 && ori == "landscape-left") || (mot_beta < -90 && ori == "landscape-right")) && game_started) {
         check_answer(false)
     } else if (((mot_beta < -90 && ori == "landscape-left") || (mot_beta > 90 && ori == "landscape-right")) && game_started){
@@ -30613,7 +30611,6 @@ async function orientation_check(orientation) {
         await delay(1000)
         game_started = true
 
-		document.querySelector("#test").innerHTML = "l-left"
 	} else if ((ori_gamma >= 40 && Math.abs(ori_beta) <= 25) || (ori_gamma <= -40 && Math.abs(ori_beta) >= 155)) {
 		ori = "landscape-right"
 
@@ -30621,10 +30618,8 @@ async function orientation_check(orientation) {
         await delay(1000)
         game_started = true
 
-		document.querySelector("#test").innerHTML = "l-right"
 	} else {
 		display_screen("landscape-request")
-		document.querySelector("#test").innerHTML = "none"
 	}
 }
 
