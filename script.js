@@ -30541,11 +30541,10 @@ for (let option in data) {
 
 async function choose_set() {
 	set = event.target.id
+	run_game()
 	
 	await delay(1500)
 	game_started = true
-    
-    run_game()
 }
 
 function requestOrientationPermission(){
@@ -30559,6 +30558,7 @@ function requestOrientationPermission(){
 }
 
 window.addEventListener("devicemotion", motion_check)
+window.addEventListener("deviceorientation", orientation_check)
 
 async function motion_check(motion) {
     if (pause) {
@@ -30577,8 +30577,6 @@ async function motion_check(motion) {
         check_answer(false)
     } else if (beta < -90 && game_started){
         check_answer(true)
-    } else {
-        window.addEventListener("deviceorientation", orientation_check)
     }
 }
 
@@ -30634,6 +30632,7 @@ function run_game() {
 function reset() {
     set = null;
     game_started = false;
+	document.querySelector("#game-word").innerHTML = "";
     orientation_check();
 }
 
