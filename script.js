@@ -30539,9 +30539,13 @@ for (let option in data) {
 	window[option + "_copy"] = []
 }
 
-function choose_set() {
-	delay(1500)
-    set = event.target.id
+async function choose_set() {
+	// chosen set is needed as target gets removed from the delay
+	chosen_set = event.target.id
+	
+	await delay(1500)
+	
+    set = chosen_set
     run_game()
 }
 
