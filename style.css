@@ -24,8 +24,8 @@ body {
     padding: 0px;
 }
 
-.title {
-    margin-top: 1%;
+#title {
+    margin-top: 4vh;
 }
 
 .start-screen {
