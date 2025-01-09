@@ -30561,11 +30561,11 @@ window.addEventListener("devicemotion", motion_check)
 window.addEventListener("deviceorientation", orientation_check)
 
 async function motion_check(motion) {
-    if (pause) {
+	if (set == null) {
+        display_screen("game-select")
         return
     }
-    if (set == null) {
-        display_screen("game-select")
+    if (pause) {
         return
     }
 
@@ -30581,11 +30581,11 @@ async function motion_check(motion) {
 }
 
 async function orientation_check(orientation) {
-    if (pause) {
+	if (set == null) {
+        display_screen("game-select")
         return
     }
-    if (set == null) {
-        display_screen("game-select")
+    if (pause) {
         return
     }
 
