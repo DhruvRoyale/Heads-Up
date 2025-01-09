@@ -30529,7 +30529,6 @@ let data = {"hollywood": [
 ]}
 
 let set = null;
-let set_selected = false;
 let game_score = 0;
 let pause = false;
 let game_started = false;
@@ -30542,8 +30541,9 @@ for (let option in data) {
 
 function choose_set() {
     set = event.target.id
+	pause = true;
 	delay(1500)
-	set_selected = true;
+	pause = false;
     run_game()
 }
 
@@ -30563,7 +30563,7 @@ async function motion_check(motion) {
     if (pause) {
         return
     }
-    if (!set_selected) {
+    if (set == null) {
         display_screen("game-select")
         return
     }
@@ -30616,7 +30616,7 @@ async function orientation_check(orientation) {
     if (pause) {
         return
     }
-    if (!set_selected) {
+    if (set == null) {
         display_screen("game-select")
         return
     }
@@ -30637,7 +30637,7 @@ async function orientation_check(orientation) {
 }
 
 function run_game() {
-    if (!set_selected) {
+    if (set == null) {
         alert("No set chosen")
         return
     }
@@ -30663,7 +30663,6 @@ function run_game() {
 }
 
 function reset() {
-	set_selected = false;
     set = null;
     game_started = false;
     orientation_check();
