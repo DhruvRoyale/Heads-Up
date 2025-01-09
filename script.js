@@ -30529,6 +30529,7 @@ let data = {"hollywood": [
 ]}
 
 let set = null;
+let set_selected = false;
 let game_score = 0;
 let pause = false;
 let game_started = false;
@@ -30542,6 +30543,7 @@ for (let option in data) {
 function choose_set() {
     set = event.target.id
 	delay(1500)
+	set_selected = true;
     run_game()
 }
 
@@ -30558,14 +30560,14 @@ function requestOrientationPermission(){
 window.addEventListener("devicemotion", motion_check)
 
 async function motion_check(motion) {
-    if (pause == true) {
+    if (pause) {
         return
     }
-    if (set == null) {
+    if (!set_selected) {
         display_screen("game-select")
         return
     }
-    if (game_started == false) {
+    if (!game_started) {
         window.addEventListener("deviceorientation", orientation_check)
         return
     }
@@ -30611,10 +30613,10 @@ async function motion_check(motion) {
 }
 
 async function orientation_check(orientation) {
-    if (pause == true) {
+    if (pause) {
         return
     }
-    if (set == null) {
+    if (!set_selected) {
         display_screen("game-select")
         return
     }
@@ -30635,7 +30637,7 @@ async function orientation_check(orientation) {
 }
 
 function run_game() {
-    if (set == null) {
+    if (!set_selected) {
         alert("No set chosen")
         return
     }
@@ -30661,6 +30663,7 @@ function run_game() {
 }
 
 function reset() {
+	set_selected = false;
     set = null;
     game_started = false;
     orientation_check();
