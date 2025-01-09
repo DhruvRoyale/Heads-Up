@@ -30532,6 +30532,17 @@ let set = null;
 let game_score = 0;
 let pause = false;
 let game_started = false;
+let in_range = false;
+
+// Orientation variables
+let ori_alpha = 0;
+let ori_beta = 0; 
+let ori_gamma = 0;
+
+// Motion variables
+let mot_alpha = 0;
+let mot_beta = 0;
+let mot_gamma = 0;
 
 // Initialise empty copies for each option
 
@@ -30569,13 +30580,13 @@ async function motion_check(motion) {
         return
     }
 
-    let alpha = motion.rotationRate.alpha;
-    let beta = motion.rotationRate.beta;
-    let gamma = motion.rotationRate.gamma;
+    mot_alpha = motion.rotationRate.alpha;
+    mot_beta = motion.rotationRate.beta;
+    mot_gamma = motion.rotationRate.gamma;
 
-    if (beta > 90 && game_started) {
+    if (mot_beta > 90 && game_started && !in_range) {
         check_answer(false)
-    } else if (beta < -90 && game_started){
+    } else if (mot_beta < -90 && game_started && !in_range){
         check_answer(true)
     }
 }
@@ -30589,15 +30600,17 @@ async function orientation_check(orientation) {
         return
     }
 
-    let alpha = orientation.alpha;
-    let beta = orientation.beta;
-    let gamma = orientation.gamma;
+    ori_alpha = orientation.alpha;
+    ori_beta = orientation.beta;
+    ori_gamma = orientation.gamma;
 
-    if (Math.abs(gamma) >= 40 && (Math.abs(beta) <= 25 || Math.abs(beta) >= 155)) {
+    if (Math.abs(ori_gamma) >= 40 && (Math.abs(ori_beta) <= 25 || Math.abs(ori_beta) >= 155)) {
+		in_range = true
         display_screen("game")
         await delay(1000)
         game_started = true
     } else {
+		in_range = false
         display_screen("landscape-request")
     }
 }
