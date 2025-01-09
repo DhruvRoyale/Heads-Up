@@ -30584,9 +30584,11 @@ async function motion_check(motion) {
     mot_beta = motion.rotationRate.beta;
     mot_gamma = motion.rotationRate.gamma;
 
-    if (((mot_beta > 90 && screen.orientation.type == "landscape-secondary") || (mot_beta < -90 && screen.orientation.type == "landscape-primary")) && game_started && !in_range) {
+	// landscape-left = primary, landscape-right = secondary
+
+    if (((mot_beta > 90 && screen.orientation.type == "landscape-primary") || (mot_beta < -90 && screen.orientation.type == "landscape-secondary")) && game_started && !in_range) {
         check_answer(false)
-    } else if (((mot_beta < -90 && screen.orientation.type == "landscape-secondary") || (mot_beta > 90 && screen.orientation.type == "landscape-primary")) && game_started && !in_range){
+    } else if (((mot_beta < -90 && screen.orientation.type == "landscape-primary") || (mot_beta > 90 && screen.orientation.type == "landscape-secondary")) && game_started && !in_range){
         check_answer(true)
     }
 }
