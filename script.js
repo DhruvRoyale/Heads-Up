@@ -18963,7 +18963,7 @@ let data = {"hollywood": [
     {
       "word": "The LEGO Movie Videogame"
     }
-  ], "bollywood" : [
+], "bollywood" : [
     {
       "word": "Pathaan"
     },
@@ -21964,7 +21964,7 @@ let data = {"hollywood": [
     {
       "word": "FryDay"
     }
-  ], "countries": [
+], "countries": [
     {
       "word": "Afghanistan"
     },
@@ -22893,7 +22893,7 @@ let data = {"hollywood": [
     {
       "word": "Fishing"
     }
-  ], "food": [
+], "food": [
     {
       "word": "Boondi"
     },
@@ -23221,7 +23221,7 @@ let data = {"hollywood": [
     {
       "word": "Tikki"
     }
-  ], "characters": [
+], "characters": [
     {
       "word": "Mickey Mouse"
     },
@@ -23522,7 +23522,7 @@ let data = {"hollywood": [
     {
       "word": "Jack Sparrow"
     }
-  ], "harrypotter": [
+], "harrypotter": [
     {
       "word": "Harry Potter"
     },
@@ -23733,7 +23733,7 @@ let data = {"hollywood": [
     {
       "word": "Romilda Vane"
     }
-  ], "songs": [
+], "songs": [
     {
       "word": "Aankh Marey"
     },
@@ -26296,7 +26296,7 @@ let data = {"hollywood": [
     {
       "word": "Anjaana Anjaani Ki Kahani"
     }
-  ], "marvel": [
+], "marvel": [
     {
       "word": "Captain America"
     },
@@ -26897,7 +26897,7 @@ let data = {"hollywood": [
     {
       "word": "Wakanda"
     }
-  ], "starwars": [
+], "starwars": [
     {
       "word": "Luke Skywalker"
     },
@@ -27081,7 +27081,7 @@ let data = {"hollywood": [
     {
       "word": "Blaster Rifle"
     }
-  ], "pokemon": [
+], "pokemon": [
     {
       "word": "Bulbasaur"
     },
@@ -30157,7 +30157,7 @@ let data = {"hollywood": [
     {
       "word": "Pecharunt"
     }
-  ], "disney": [
+], "disney": [
     {
       "word": "Snow White and the Seven Dwarfs"
     },
@@ -30434,7 +30434,7 @@ let data = {"hollywood": [
     {
       "word": "Dory"
     }
-  ], "modernfamily": [
+], "modernfamily": [
     {
       "word": "Alex Dunphy"
     },
@@ -30510,12 +30510,34 @@ let data = {"hollywood": [
     {
       "word": "Javier Delgado"
     }
-  ]}
+], "test": [
+	{
+		"word": "1"
+	},
+	{
+		"word": "2"
+	},
+	{
+		"word": "3"
+	},
+	{
+		"word": "4"
+	},
+	{
+		"word": "5"
+	}
+]}
 
 let set = null;
 let game_score = 0;
 let pause = false;
 let game_started = false;
+
+// Initialise empty copies for each option
+
+for (let option in data) {
+	window[option + "_copy"] = []
+}
 
 function choose_set() {
     set = event.target.id
@@ -30554,6 +30576,10 @@ async function motion_check(motion) {
     if (beta > 90) {
         pause = true
         display_screen("wrong")
+		
+		if (window.navigator.vibrate) {
+			window.navigator.vibrate(200)
+		}
 
         await delay(1500)
         run_game()
@@ -30564,6 +30590,10 @@ async function motion_check(motion) {
     } else if (beta < -90){
         pause = true
         display_screen("correct")
+
+		if (window.navigator.vibrate) {
+			window.navigator.vibrate(200)
+		}
 
         game_score += 1;
         document.querySelector("#score").innerHTML = "Score: " + game_score;
@@ -30608,7 +30638,24 @@ function run_game() {
         alert("No set chosen")
         return
     }
-    let game_word = data[set][Math.floor(Math.random() * data[set].length)]["word"];
+
+	// If array is empty, reset to data (Resets to data when all options finish)
+
+	if (window[set + "_copy"].length == 0) {
+		window[set + "_copy"] = data[set].slice()
+	}
+
+	// Generate random index
+
+	let random_index = Math.floor(Math.random()*window[set + "_copy"].length)
+
+    let game_word = window[set + "_copy"][random_index]
+
+	// Remove the word from the copy to avoid duplicates (reorders array but faster than splice)
+
+	window[set + "_copy"][random_index] = window[set + "_copy"][window[set + "_copy"].length - 1]
+	window[set + "_copy"].pop()
+
     document.querySelector("#game-word").innerHTML = game_word;
 }
 
