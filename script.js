@@ -30540,12 +30540,11 @@ for (let option in data) {
 }
 
 async function choose_set() {
-	// chosen set is needed as target gets removed from the delay
-	chosen_set = event.target.id
+	set = event.target.id
 	
 	await delay(1500)
-	
-    set = chosen_set
+	game_started = true
+    
     run_game()
 }
 
@@ -30569,18 +30568,14 @@ async function motion_check(motion) {
         display_screen("game-select")
         return
     }
-    if (!game_started) {
-        window.addEventListener("deviceorientation", orientation_check)
-        return
-    }
 
     let alpha = motion.rotationRate.alpha;
     let beta = motion.rotationRate.beta;
     let gamma = motion.rotationRate.gamma;
 
-    if (beta > 90) {
+    if (beta > 90 && game_started) {
         check_answer(false)
-    } else if (beta < -90){
+    } else if (beta < -90 && game_started){
         check_answer(true)
     } else {
         window.addEventListener("deviceorientation", orientation_check)
@@ -30595,8 +30590,6 @@ async function orientation_check(orientation) {
         display_screen("game-select")
         return
     }
-
-    game_started = true
 
     let alpha = orientation.alpha;
     let beta = orientation.beta;
