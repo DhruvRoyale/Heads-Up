@@ -30632,8 +30632,8 @@ function run_game() {
 function reset() {
     set = null;
     game_started = false;
+	display_screen("game-select")
 	document.querySelector("#game-word").innerHTML = "";
-    orientation_check();
 }
 
 function display_screen(screen) {
