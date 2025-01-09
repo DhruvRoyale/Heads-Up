@@ -30577,36 +30577,9 @@ async function motion_check(motion) {
     let gamma = motion.rotationRate.gamma;
 
     if (beta > 90) {
-        pause = true
-        display_screen("wrong")
-		
-		if (window.navigator.vibrate) {
-			window.navigator.vibrate(200)
-		}
-
-        await delay(1500)
-        run_game()
-        
-        display_screen("game")
-        await delay(1500)
-        pause = false
+        check_answer(false)
     } else if (beta < -90){
-        pause = true
-        display_screen("correct")
-
-		if (window.navigator.vibrate) {
-			window.navigator.vibrate(200)
-		}
-
-        game_score += 1;
-        document.querySelector("#score").innerHTML = "Score: " + game_score;
-        
-        await delay(1500)
-        run_game()
-
-        display_screen("game")
-        await delay(1500)
-        pause = false
+        check_answer(true)
     } else {
         window.addEventListener("deviceorientation", orientation_check)
     }
@@ -30652,7 +30625,7 @@ function run_game() {
 
 	let random_index = Math.floor(Math.random()*window[set + "_copy"].length)
 
-    let game_word = window[set + "_copy"][random_index]
+    let game_word = window[set + "_copy"][random_index]["word"]
 
 	// Remove the word from the copy to avoid duplicates (reorders array but faster than splice)
 
@@ -30660,6 +30633,7 @@ function run_game() {
 	window[set + "_copy"].pop()
 
     document.querySelector("#game-word").innerHTML = game_word;
+	console.log(document.querySelector("#game-word").innerHTML)
 }
 
 function reset() {
@@ -30678,6 +30652,31 @@ function display_screen(screen) {
             document.querySelector("." + screens[i]).hidden = true;
         }
     }
+}
+
+
+async function check_answer(correct) {
+	pause = true
+
+	if (correct) {
+		display_screen("correct")
+
+		game_score += 1;
+		document.querySelector("#score").innerHTML = "Score: " + game_score;
+	} else {
+		display_screen("wrong")
+	}
+
+	if (window.navigator.vibrate) {
+		window.navigator.vibrate(200)
+	}
+	
+	await delay(1500)
+	run_game()
+
+	display_screen("game")
+	await delay(1500)
+	pause = false
 }
 
 function delay(n) {
