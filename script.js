@@ -30660,6 +30660,7 @@ function reset() {
 	display_screen("game-select")
 	document.querySelector("#game-word").innerHTML = "";
 	game_score = 0;
+	document.querySelector("#score").innerHTML = "Score: 0";
 }
 
 function display_screen(screen) {
